@@ -51,6 +51,7 @@ if 'arial' in py.font.get_fonts():
 kaomojis = [
     '*-*',
     '^-^',
+    '^b^',
     '^o^',
     '^u^',
     'T-T',
