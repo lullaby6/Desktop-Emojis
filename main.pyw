@@ -10,8 +10,8 @@ from sys import exit
 title = 'Destkop Kaomoji'
 font_size = 20
 delay = 5
-
 screen_width, screen_height = 75, 50
+
 # device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 device = GetMonitorInfo(MonitorFromPoint((0, 0))).get("Work")
 device_width, device_height = device[2], device[3]
@@ -43,7 +43,7 @@ SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWI
 ShowWindow(hwnd, SW_MAXIMIZE)
 SetForegroundWindow(hwnd)
 
-font = py.font.Font(None, 25)
+font = py.font.Font(None, font_size)
 if 'arial' in py.font.get_fonts():
     font = py.font.SysFont('arial', font_size)
 
