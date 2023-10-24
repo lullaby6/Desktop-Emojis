@@ -1,6 +1,6 @@
 # Desktop Emojis
 
-An bipolar emoji on the bottom-right side of your screen that accompanies you.
+A emoji friend on the bottom-right side of your screen!
 
 Made with pygame and win32 apis.
 
