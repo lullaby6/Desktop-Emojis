@@ -1,15 +1,17 @@
-import pygame, win32api, win32con, win32gui
+import pygame as py
+from win32api import GetMonitorInfo, MonitorFromPoint, RGB
+from win32con import GWL_EXSTYLE, WS_EX_LAYERED, LWA_COLORKEY, WS_EX_TOOLWINDOW, SW_MAXIMIZE
+from win32gui import SetWindowLong, GetWindowLong, SetLayeredWindowAttributes, ShowWindow, SetForegroundWindow
 from os import environ
 from random import choice
-from time import sleep
 from datetime import datetime
 from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
 screen_width, screen_height = 75, 50
-device = win32api.GetMonitorInfo(win32api.MonitorFromPoint((0, 0))).get("Work")
-# device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
+device = GetMonitorInfo(MonitorFromPoint((0, 0))).get("Work")
+# device_width, device_height = .GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 device_width, device_height = device[2], device[3]
 
 screen_pos_x, screen_pos_y = device_width - screen_width, device_height - screen_height
@@ -17,31 +19,31 @@ screen_pos_x, screen_pos_y = device_width - screen_width, device_height - screen
 # set window position
 environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (screen_pos_x, screen_pos_y)
 
-pygame.init()
+py.init()
 
-pygame.display.set_caption(title)
+py.display.set_caption(title)
 
-screen = pygame.display.set_mode((screen_width, screen_height), pygame.NOFRAME)
+screen = py.display.set_mode((screen_width, screen_height), py.NOFRAME)
 
-# get window from pygame
-hwnd = pygame.display.get_wm_info()["window"]
+# get window from py
+hwnd = py.display.get_wm_info()["window"]
 
 # allow window transparency
 color_to_alpha = 128
-win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(
-                        hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_LAYERED)
-win32gui.SetLayeredWindowAttributes(hwnd, win32api.RGB(color_to_alpha, color_to_alpha, color_to_alpha), 0, win32con.LWA_COLORKEY)
+SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(
+                        hwnd, GWL_EXSTYLE) | WS_EX_LAYERED)
+SetLayeredWindowAttributes(hwnd, RGB(color_to_alpha, color_to_alpha, color_to_alpha), 0, LWA_COLORKEY)
 
 # hide window from taskbar
-win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_TOOLWINDOW)
+SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW)
 
 # maximize window
-win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
-win32gui.SetForegroundWindow(hwnd)
+ShowWindow(hwnd, SW_MAXIMIZE)
+SetForegroundWindow(hwnd)
 
-# print(pygame.font.get_fonts())
-# font = pygame.font.Font(None, 25)
-font = pygame.font.SysFont('arial', font_size)
+# print(py.font.get_fonts())
+# font = py.font.Font(None, 25)
+font = py.font.SysFont('arial', font_size)
 
 kaomojis = [
     '*-*',
@@ -65,8 +67,8 @@ seconds = 60
 
 running = True
 while running:
-    win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
-    try: win32gui.SetForegroundWindow(hwnd)
+    ShowWindow(hwnd, SW_MAXIMIZE)
+    try: SetForegroundWindow(hwnd)
     except Exception as e: pass
 
     time_difference = int((current_time - datetime.now()).total_seconds())*-1
@@ -84,9 +86,7 @@ while running:
 
     screen.blit(text, (text_x, text_y))
 
-    pygame.display.flip()
+    py.display.flip()
 
-    sleep(1)
-
-pygame.quit()
+py.quit()
 exit()
