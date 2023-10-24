@@ -19,6 +19,6 @@ python main.pyw
 
 ## Download
 
-[Click here to download](https://github.com/lullaby6/Desktop-Emojis/releases/download/v1.0/Desktop.Emojis.zip) (.exe)
+[Click here to download](https://github.com/lullaby6/Desktop-Emojis/releases/download/v1.0/Desktop-Emojis.zip) (.exe)
 
 Notes: you need unzip the downloaded file, and if you want autorun open the file ```autorun.bat```
