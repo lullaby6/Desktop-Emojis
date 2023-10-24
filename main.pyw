@@ -61,6 +61,20 @@ kaomojis = [
     'U.u',
     'u.U',
     'u.u',
+    'UvU',
+    'UwU',
+    'U-U',
+    'O-O',
+    '.-.',
+    '-.-',
+    'o_o',
+    'O_O',
+    'O_o',
+    'o_O',
+    'U_U',
+    'U_u',
+    'u_U',
+    'u_u',
 ]
 
 kaomoji = choice(kaomojis)
