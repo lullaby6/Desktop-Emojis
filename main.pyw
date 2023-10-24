@@ -5,6 +5,7 @@ from win32gui import SetWindowLong, GetWindowLong, SetLayeredWindowAttributes, S
 from os import environ
 from random import choice
 from datetime import datetime
+from time import sleep
 
 title = 'Destkop Kaomoji'
 font_size = 20
@@ -61,30 +62,30 @@ kaomojis = [
 
 kaomoji = choice(kaomojis)
 
+text = font.render(kaomoji, True, (255, 255, 255, 0))
+text_rect = text.get_rect()
+text_x = (screen_width - text_rect.width) / 2
+text_y = (screen_height - text_rect.height) / 2
+
 current_time = datetime.now()
 seconds = 60
 
-running = True
-while running:
-    ShowWindow(hwnd, SW_MAXIMIZE)
-    try: SetForegroundWindow(hwnd)
-    except Exception as e: pass
+clock = py.time.Clock()
 
+while True:
     time_difference = int((current_time - datetime.now()).total_seconds())*-1
 
     if time_difference > seconds:
         current_time = datetime.now()
         kaomoji = choice(kaomojis)
+        text = font.render(kaomoji, True, (255, 255, 255, 0))
+        text_rect = text.get_rect()
+        text_x = (screen_width - text_rect.width) / 2
+        text_y = (screen_height - text_rect.height) / 2
 
     screen.fill((color_to_alpha, color_to_alpha, color_to_alpha))
 
-    text = font.render(kaomoji, True, (255, 255, 255, 0))
-    text_rect = text.get_rect()
-    text_x = (screen_width - text_rect.width) / 2
-    text_y = (screen_height - text_rect.height) / 2
-
     screen.blit(text, (text_x, text_y))
 
-    py.display.flip()
-
-py.quit()
+    py.display.update()
+    clock.tick(1)
