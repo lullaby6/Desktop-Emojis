@@ -5,7 +5,6 @@ from win32gui import SetWindowLong, GetWindowLong, SetLayeredWindowAttributes, S
 from os import environ
 from random import choice
 from datetime import datetime
-from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
@@ -89,4 +88,3 @@ while running:
     py.display.flip()
 
 py.quit()
-exit()
