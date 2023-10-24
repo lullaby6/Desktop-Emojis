@@ -8,4 +8,4 @@ Made with pygame and win32 apis.
 
 ## Run
 
-To run the program open the file ```main.pyw``` or run the command ```python main.pyw```
+To run the sript open the file ```main.pyw``` or run the command ```python main.pyw```
