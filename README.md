@@ -25,4 +25,4 @@ if you want autorun open the file ```autorun.pyw.bat```
 
 You need unzip the downloaded file, and if you want autorun open the file ```autorun.bat```
 
-Warning: in the executable version (.exe) the emoji does not have permissions to be displayed above other windows, so it does not have the fixed display property, therefore I recommend to run it with python if you are familiar with it.
+Warning: in the executable version (.exe) the emoji does not have permissions to be displayed above other windows, so it does not have the fixed display property, therefore I recommend to [run it with python](#run) if you are familiar with it.
