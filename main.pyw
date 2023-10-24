@@ -14,6 +14,7 @@ device_width, device_height = device[2], device[3]
 
 screen_pos_x, screen_pos_y = device_width - screen_width, device_height - screen_height
 
+# set window position
 environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (screen_pos_x, screen_pos_y)
 
 pygame.init()
