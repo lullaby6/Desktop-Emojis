@@ -36,7 +36,7 @@ SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(
 SetLayeredWindowAttributes(hwnd, RGB(color_to_alpha, color_to_alpha, color_to_alpha), 0, LWA_COLORKEY)
 
 # hide window from taskbar
-# SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW)
+SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW)
 
 # maximize window
 ShowWindow(hwnd, SW_MAXIMIZE)
@@ -77,8 +77,7 @@ running = True
 while running:
     for event in py.event.get():
         if event.type == py.QUIT:
-            py.quit()
-            exit()
+            running = False
 
     time_difference = int((current_time - datetime.now()).total_seconds())*-1
 
