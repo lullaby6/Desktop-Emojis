@@ -69,21 +69,18 @@ def init():
 
     # get window from pygame
     hwnd = py.display.get_wm_info()["window"]
+    
 
-    # allow window transparency
-    SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(
-                            hwnd, GWL_EXSTYLE) | WS_EX_LAYERED)
+    # allow window transparency and hide window from taskbar
+    SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_TOOLWINDOW)
     SetLayeredWindowAttributes(hwnd, RGB(*transparency), 0, LWA_COLORKEY)
-
-    # hide window from taskbar
-    SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW)
-
-    # set window position fixed
-    SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE)
 
     # maximize window
     ShowWindow(hwnd, SW_MAXIMIZE)
     SetForegroundWindow(hwnd)
+    
+    # set window position fixed
+    SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE)
 
     return screen
 
