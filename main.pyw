@@ -9,7 +9,7 @@ from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
-delay = 60
+delay = 5
 
 screen_width, screen_height = 75, 50
 # device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
@@ -78,16 +78,16 @@ kaomojis = [
     'u_u',
 ]
 
-while True:
+running = True
+while running:
+    for event in py.event.get():
+        if event.type == py.QUIT:
+            running = False
+
     ShowWindow(hwnd, SW_MAXIMIZE)
     try:
         SetForegroundWindow(hwnd)
     except: pass
-
-    for event in py.event.get():
-        if event.type == py.QUIT:
-            py.quit()
-            exit()
 
     kaomoji = choice(kaomojis)
     text = font.render(kaomoji, True, (255, 255, 255, 0))
@@ -102,3 +102,6 @@ while True:
     py.display.update()
 
     sleep(delay)
+
+py.quit()
+exit()
