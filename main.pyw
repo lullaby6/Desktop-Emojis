@@ -6,12 +6,13 @@ from os import environ
 from random import choice
 from datetime import datetime
 from time import sleep
+from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
 screen_width, screen_height = 75, 50
+# device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 device = GetMonitorInfo(MonitorFromPoint((0, 0))).get("Work")
-# device_width, device_height = .GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 device_width, device_height = device[2], device[3]
 
 screen_pos_x, screen_pos_y = device_width - screen_width, device_height - screen_height
@@ -35,7 +36,7 @@ SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(
 SetLayeredWindowAttributes(hwnd, RGB(color_to_alpha, color_to_alpha, color_to_alpha), 0, LWA_COLORKEY)
 
 # hide window from taskbar
-SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW)
+# SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW)
 
 # maximize window
 ShowWindow(hwnd, SW_MAXIMIZE)
@@ -72,7 +73,13 @@ seconds = 60
 
 clock = py.time.Clock()
 
-while True:
+running = True
+while running:
+    for event in py.event.get():
+        if event.type == py.QUIT:
+            py.quit()
+            exit()
+
     time_difference = int((current_time - datetime.now()).total_seconds())*-1
 
     if time_difference > seconds:
@@ -89,3 +96,7 @@ while True:
 
     py.display.update()
     clock.tick(1)
+    sleep(1)
+
+py.quit()
+exit()
