@@ -10,6 +10,8 @@ from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
+seconds = 60
+
 screen_width, screen_height = 75, 50
 # device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
 device = GetMonitorInfo(MonitorFromPoint((0, 0))).get("Work")
@@ -42,9 +44,9 @@ SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWI
 ShowWindow(hwnd, SW_MAXIMIZE)
 SetForegroundWindow(hwnd)
 
-# print(py.font.get_fonts())
-# font = py.font.Font(None, 25)
-font = py.font.SysFont('arial', font_size)
+font = py.font.Font(None, 25)
+if 'arial' in py.font.get_fonts():
+    font = py.font.SysFont('arial', font_size)
 
 kaomojis = [
     '*-*',
@@ -69,12 +71,14 @@ text_x = (screen_width - text_rect.width) / 2
 text_y = (screen_height - text_rect.height) / 2
 
 current_time = datetime.now()
-seconds = 60
-
-clock = py.time.Clock()
 
 running = True
 while running:
+    ShowWindow(hwnd, SW_MAXIMIZE)
+    try:
+        SetForegroundWindow(hwnd)
+    except: pass
+
     for event in py.event.get():
         if event.type == py.QUIT:
             running = False
@@ -94,7 +98,6 @@ while running:
     screen.blit(text, (text_x, text_y))
 
     py.display.update()
-    clock.tick(1)
     sleep(1)
 
 py.quit()
