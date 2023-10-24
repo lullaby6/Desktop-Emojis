@@ -2,17 +2,20 @@ import pygame as py
 from win32api import GetMonitorInfo, MonitorFromPoint, RGB
 from win32con import GWL_EXSTYLE, WS_EX_LAYERED, LWA_COLORKEY, WS_EX_TOOLWINDOW, SW_MAXIMIZE, HWND_TOPMOST, SWP_NOMOVE, SWP_NOSIZE
 from win32gui import SetWindowLong, GetWindowLong, SetLayeredWindowAttributes, ShowWindow, SetForegroundWindow, SetWindowPos
-from os import environ
+from os import environ, path
 from random import choice
 from datetime import datetime
 from time import sleep
 from sys import exit
 from json import loads
 
-config_file = open("config.json", "r")
-config_json = config_file.read()
-config = loads(config_json)
-config_file.close()
+config = {}
+try:
+    config_file = open(path.join(path.dirname(__file__), "config.json"), "r")
+    config_json = config_file.read()
+    config = loads(config_json)
+    config_file.close()
+except: pass
 
 title = 'Desktop Emojis'
 
@@ -123,4 +126,4 @@ def main():
     quit()
 
 if __name__ == "__main__":
-	main()
+    main()
