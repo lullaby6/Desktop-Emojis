@@ -7,56 +7,42 @@ from random import choice
 from datetime import datetime
 from time import sleep
 from sys import exit
+from json import loads
 
-title = 'Destkop Kaomoji'
-font_size = 20
-duration = 60
-screen_width, screen_height = 75, 50
-transparency = (128, 128, 128)
-sleep_time = 1
+config_file = open("config.json", "r")
+config_json = config_file.read()
+config = loads(config_json)
+config_file.close()
 
-kaomojis = [
+title = 'Desktop Emojis'
+
+font_size = config.get('font_size', 18)
+screen_width, screen_height = config.get('screen_width', 75), config.get('screen_height', 50)
+
+time_between_emojis = config.get('time_between_emojis', 60000)
+sleep_time = config.get('sleep_time', 1000)
+
+emojis = config.get('emojis', [
     '*-*',
     '^-^',
-    '^b^',
-    '^o^',
-    '^u^',
     'T-T',
     'O.O',
-    'o.O',
-    'O.o',
-    'U.U',
-    'U.u',
-    'u.U',
     'u.u',
-    'UvU',
     'UwU',
-    'UbU',
     'UoU',
-    'U-U',
-    'O-O',
-    '.-.',
-    '-.-',
-    'o_o',
-    'O_O',
-    'O_o',
-    'o_O',
-    'U_U',
-    'U_u',
-    'u_U',
-    'u_u',
     ';-;',
-    ';_;',
-]
+])
 
-def kaomoji_text():
+transparency = (128, 128, 128)
+
+def emoji_text():
     # load font
     font = py.font.Font(None, font_size)
     if 'arial' in py.font.get_fonts():
         font = py.font.SysFont('arial', font_size)
 
-    kaomoji = choice(kaomojis)
-    text = font.render(kaomoji, True, (255, 255, 255, 0))
+    emoji = choice(emojis)
+    text = font.render(emoji, True, (255, 255, 255, 0))
     text_rect = text.get_rect()
     text_x = (screen_width - text_rect.width) / 2
     text_y = (screen_height - text_rect.height) / 2
@@ -99,7 +85,7 @@ def init():
     return screen
 
 def update(screen):
-    text, text_x, text_y = kaomoji_text()
+    text, text_x, text_y = emoji_text()
 
     current_time = datetime.now()
 
@@ -112,10 +98,10 @@ def update(screen):
 
         time_difference = int((current_time - datetime.now()).total_seconds())*-1
 
-        if time_difference > duration:
+        if time_difference > (time_between_emojis / 1000):
             current_time = datetime.now()
 
-            text, text_x, text_y = kaomoji_text()
+            text, text_x, text_y = emoji_text()
 
         screen.fill(transparency)
 
@@ -123,7 +109,7 @@ def update(screen):
 
         py.display.update()
 
-        sleep(sleep_time)
+        sleep(sleep_time / 1000)
 
 def quit():
     py.quit()
