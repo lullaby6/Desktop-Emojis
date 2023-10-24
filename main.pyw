@@ -4,13 +4,12 @@ from win32con import GWL_EXSTYLE, WS_EX_LAYERED, LWA_COLORKEY, WS_EX_TOOLWINDOW,
 from win32gui import SetWindowLong, GetWindowLong, SetLayeredWindowAttributes, ShowWindow, SetForegroundWindow
 from os import environ
 from random import choice
-from datetime import datetime
 from time import sleep
 from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
-seconds = 60
+delay = 60
 
 screen_width, screen_height = 75, 50
 # device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
@@ -79,17 +78,7 @@ kaomojis = [
     'u_u',
 ]
 
-kaomoji = choice(kaomojis)
-
-text = font.render(kaomoji, True, (255, 255, 255, 0))
-text_rect = text.get_rect()
-text_x = (screen_width - text_rect.width) / 2
-text_y = (screen_height - text_rect.height) / 2
-
-current_time = datetime.now()
-
-running = True
-while running:
+while True:
     ShowWindow(hwnd, SW_MAXIMIZE)
     try:
         SetForegroundWindow(hwnd)
@@ -97,24 +86,19 @@ while running:
 
     for event in py.event.get():
         if event.type == py.QUIT:
-            running = False
+            py.quit()
+            exit()
 
-    time_difference = int((current_time - datetime.now()).total_seconds())*-1
-
-    if time_difference > seconds:
-        current_time = datetime.now()
-        kaomoji = choice(kaomojis)
-        text = font.render(kaomoji, True, (255, 255, 255, 0))
-        text_rect = text.get_rect()
-        text_x = (screen_width - text_rect.width) / 2
-        text_y = (screen_height - text_rect.height) / 2
+    kaomoji = choice(kaomojis)
+    text = font.render(kaomoji, True, (255, 255, 255, 0))
+    text_rect = text.get_rect()
+    text_x = (screen_width - text_rect.width) / 2
+    text_y = (screen_height - text_rect.height) / 2
 
     screen.fill((color_to_alpha, color_to_alpha, color_to_alpha))
 
     screen.blit(text, (text_x, text_y))
 
     py.display.update()
-    sleep(1)
 
-py.quit()
-exit()
+    sleep(delay)
