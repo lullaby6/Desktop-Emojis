@@ -9,7 +9,7 @@ from sys import exit
 
 title = 'Destkop Kaomoji'
 font_size = 20
-delay = 5
+delay = 60
 screen_width, screen_height = 75, 50
 
 # device_width, device_height = win32api.GetSystemMetrics(0), win32api.GetSystemMetrics(1)
