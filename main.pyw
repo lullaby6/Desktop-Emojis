@@ -64,6 +64,7 @@ kaomojis = [
     'UvU',
     'UwU',
     'UbU',
+    'UoU',
     'U-U',
     'O-O',
     '.-.',
