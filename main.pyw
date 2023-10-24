@@ -76,6 +76,8 @@ kaomojis = [
     'U_u',
     'u_U',
     'u_u',
+    ';-;',
+    ';_;',
 ]
 
 running = True
