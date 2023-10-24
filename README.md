@@ -9,9 +9,7 @@ Made with pygame and win32 apis.
 
 ## Run
 
-Clone or download this repository and open the file ```Desktop Emojis.pyw```
-
-or run the command 
+Clone or download this repository and open the file ```Desktop Emojis.pyw``` or run the command:
 
 ```bash
 python "Desktop Emojis.pyw"
