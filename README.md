@@ -1,5 +1,7 @@
 # Desktop Emojis
 
+An bipolar emoji on the bottom-left side of your screen that accompanies you.
+
 Made with pygame and win32 apis.
 
 ## Requeriments
