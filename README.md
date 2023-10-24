@@ -17,6 +17,8 @@ Clone or download this repository and open the file ```main.pyw``` or run the co
 python main.pyw
 ```
 
+if you want autorun open the file ```autorun.pyw.bat```
+
 ## Download
 
 [Click here to download](https://github.com/lullaby6/Desktop-Emojis/releases/download/v1.0/Desktop-Emojis.zip) (.exe)
