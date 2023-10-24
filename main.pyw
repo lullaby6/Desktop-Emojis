@@ -6,20 +6,8 @@ from os import environ, path
 from random import choice
 from datetime import datetime
 from time import sleep
-from sys import exit, executable
+from sys import exit
 from json import loads
-
-from ctypes import windll
-
-def run_as_admin():
-    try:
-        if not windll.shell32.IsUserAnAdmin():
-            windll.shell32.ShellExecuteW(None, "runas", executable, __file__, None, 1)
-            exit()
-    except Exception as e:
-        print(f"An error occurred while elevating administrator privileges: {str(e)}")
-
-run_as_admin()
 
 config = {}
 try:
