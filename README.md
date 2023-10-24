@@ -4,6 +4,7 @@ Made with pygame and win32 apis.
 
 ## Requeriments
 
+- ```Python```
 - ```Windows```
 
 ## Run
